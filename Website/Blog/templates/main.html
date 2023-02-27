@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% include 'bootstrap.html' %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'main.css' %}" type="text/css">
+    {% block title %}
+    <title>Strona główna</title>
+    {% endblock %}
+</head>
+<body>
+    {% include 'navbar.html' %}
+        <div class="row row-background gx-0 d-flex min-vh-100">
+                {% block content %}
+                <div class="col d-flex justify-content-center pt-4">
+                    <div class="col-8 d-flex align-items-center flex-column">
+                        {% if user.is_authenticated %}
+                        <button class="bg-primary p-2 rounded w-100 d-flex justify-content-center mb-3" data-bs-toggle="offcanvas" href="#form-canvas"> Dodaj post </button>
+                        <div class="col-7 position-absolute top-50 start-50 translate-middle justify-content-center offcanvas bg-transparent" id="form-canvas">
+                            <div class="d-flex flex-column align-items-center bg-beige-add-post">
+                                <button type="button" class="btn-close text-reset align-self-end mt-1" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                <form method="POST" class="d-flex flex-column login-form w-100" name="add-post">
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    <button type="submit" class="d-flex justify-content-center pt-3 pb-3 bg-primary mt-2 mb-2">dodaj post</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% include 'posts.html' %}
+                    </div>
+                </div>
+            {% endblock %}
+            {% block friend_list %}
+            <div class="col-2 collapse bg-beige search" id="friend-list" tabindex="-1">
+                <div class="search w-100 text-align-center"> Znajomi</div>
+                <div class="w-100 d-flex justify-content-center">
+                <form class="rounded-pill search border border-2 border-success w-75 d-flex justify-content-center"
+                      method="GET" action="{% url 'search_user_url' %}">
+                <div class="w-75">
+                    <input type="search" class="w-100 ps-2 border-secondary" name='search' id='friend-search' placeholder="Znajdź znajomego">
+                </div>
+                <div class="w-25 text-align-center">
+                    <button type='submit' class="bi bi-search w-100 search hover-white bg-transparent"></button>
+                </div>
+                </form>
+                </div>
+                <br />
+                <div class="d-flex">
+                    <div class="w-50 text-align-center search border-right-green">
+                        obserwowani <i class="bi bi-person-heart search"> </i>
+                    </div>
+                    <div class="w-50 text-align-center search">
+                        zablokowani <i class="bi bi-person-fill-slash search"> </i>
+                    </div>
+                </div>
+                <br />
+                <div class="w-100 d-flex flex-column text-align-center search">
+                    Imie znajomego
+                    <div class="w-100 d-flex">
+                        <div class="mx-auto border-right-green text-align-center w-33">
+                            <i class="bi bi-chat-fill search"> </i>
+                        </div>
+                        <div class="mx-auto border-right-green text-align-center w-33">
+                            <i class="bi bi-person-fill-slash search"> </i>
+                        </div>
+                        <div class="mx-auto text-align-center w-33">
+                            <i class="bi bi-person-fill-dash search"> </i>
+                        </div>
+                    </div>
+                </div>
+                {{ friends }}
+            </div>
+            {% endblock %}
+        </div>
+    {% include 'footer.html' %}
+    {% include 'javascript.html' %}
+</body>
+</html>

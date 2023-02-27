@@ -1,0 +1,49 @@
+<nav class="fluid-container border-bottom  border-2 border-dark">
+    <div class="row row-background gx-0 p-2 ">
+        <div class="col-2 d-flex justify-content-center me-auto align-items-center">
+             <a class="hover-white bi bi-house-fill" href="{% url 'main_url' %}"> </a>
+        </div>
+            <div class="col-2 d-flex justify-content-center">
+                <h2 class="m-0"> <i class="font blogram"> Blogram </i> </h2>
+        </div>
+        <div class="col-1 d-flex justify-content-end pe-3 align-items-center">
+           <button class='hover-white dropdown-toggle bi bi-bell-fill' data-bs-toggle="dropdown"></button>
+            <div class="dropdown-menu search text-align-center min-vh-25"> Brak powiadomień </div>
+        </div>
+        <div class="col-2 d-flex justify-content-center align-items-center">
+            <form class="rounded-pill search border border-2
+            border-success w-100 d-flex justify-content-center" method="GET" action="{% url 'main_url' %}">
+                <div class="w-75">
+                    <input type="search" class="w-100 ps-2" id='search' name="search" placeholder="Wyszukaj">
+                </div>
+                <div class="w-25 text-align-center">
+                    <button class="hover-white bi bi-search w-100 color-green"></button>
+                </div>
+            </form>
+        </div>
+        <div class="col-1 d-flex justify-content-center align-items-center">
+            <button class="hover-white bi bi-people-fill" data-bs-toggle="collapse"
+                    data-bs-target="#friend-list" aria-controls="friend-list">
+            </button>
+        </div>
+        <div class="col-1 d-flex justify-content-center align-items-center">
+            <button class="hover-white dropdown-toggle bi bi-person-fill" data-bs-toggle="dropdown"></button>
+            <div class="dropdown-menu search text-align-center">
+                <div class="col color-green d-flex flex-column">
+                    {% if user.is_authenticated %}
+                    <a> Konto </a>
+                    <form method="POST" id="logout">
+                        {% csrf_token %}
+                        <input type="hidden" name="logout" value="True">
+                    <button type="submit" class="text-danger"> Wyloguj się </button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'login_url' %}"> Zaloguj się </a>
+                    <a href="{% url 'register_url' %}"> Zarejestruj się </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+

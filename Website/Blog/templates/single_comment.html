@@ -1,0 +1,19 @@
+<div class="mb-3">
+    <div>
+        {{ comment.user }}
+    </div>
+    <div>
+        <b class="date"> {{ comment.date|date:'l j E Y H:i:s' }} </b>
+    </div>
+    <div>
+        {{ comment.text }}
+    </div>
+    <div class="w-100 d-flex">
+        <div class="col text-align-center border-right-green">
+            <button> Odpowiedz <i class="bi bi-chat-left-dots-fill"> </i> </button>
+        </div>
+        <div class="col text-align-center border-right-green hover-white">
+            <button class="hover-white"> Polub <i class="bi bi-hand-thumbs-up-fill"> </i> </button>
+        </div>
+    </div>
+</div>

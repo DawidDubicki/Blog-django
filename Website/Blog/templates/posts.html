@@ -1,0 +1,83 @@
+<div class="col d-flex align-items-center flex-column">
+    {% for post in posts %}
+        <div class="row p-3 min-vh-10 gx-0 mb-4 bg-success col-12 d-flex flex-column align-items-center">
+            <div class="">
+                <b> <a href="{% url 'account_url' username=post.user %}"> {{ post.user }} </a> </b>
+            </div>
+            <div class="">
+                <b class="date"> {{ post.date|date:'l j E Y H:i:s' }} </b>
+            </div>
+            <div class="">
+                <h4 class=""> {{ post.title }} </h4>
+            </div>
+            <div class="mb-2">
+                <h5 class=" "> {{ post.text }} </h5>
+            </div>
+            <div class="w-100 d-flex justify-content-center align-items-center">
+                <div class="col text-align-center border-right-green">
+                    {% if request.user.is_authenticated %}
+                        {% if request.user in post.likes.all %}
+                        <button class="hover-white bi bi-heart-fill like liked" data-post-id="{{post.id}}">{{post.likes.all.count}}</button>
+                        {% else %}
+                        <button class="hover-white bi bi-heart-fill like" data-post-id="{{post.id}}">{{post.likes.all.count}}</button>
+                        {% endif %}
+                    {% else %}
+                    <button class="hover-white bi bi-heart-fill disabled" data-post-id="{{post.id}}" disabled data-bs-toggle="tooltip" data-bs-placement="top" title="Zaloguj się żeby polubić post">{{post.likes.all.count}}</button>
+                    {% endif %}
+                </div>
+                <div class="col text-align-center border-right-green d-flex align-items-center justify-content-center">
+                    <button class="hover-white bi bi-chat-left-text-fill" data-bs-toggle="collapse"
+                            data-bs-target="#comment-{{ post.id }}"> </button>
+                </div>
+                <div class="col text-align-center d-flex align-items-center justify-content-center">
+                    <button class="hover-white bi bi-exclamation-circle-fill"> </button>
+                </div>
+            </div>
+            <div class="border-top border-secondary collapse flex-column ps-3" id="comment-{{ post.id }}">
+                <div class="d-flex align-items-center flex-column mt-3 mb-4">
+                    Podziel się swoją opinią!
+                    <div class="d-flex align-items-stretch justify-content-center rounded w-75 border border-light-subtle bg-beige">
+                        <textarea class='p-2 search w-90 border-0 border' rows="2" type="text" placeholder="Napisz swój komentarz" id="comment-text-{{post.id}}"> </textarea>
+                        <button class="hover-white search p-2 w-10 text-align-center bi bi-send-fill add-comment h-auto border-start border-light-subtle" data-post-id="{{post.id}}"> </button>
+                    </div>
+                </div>
+                <div id="comments-{{post.id}}">
+                {% if post.post.all %}
+                {% for comment in post.post.all %}
+                <div class="mb-3">
+                    <div>
+                        {{ comment.user }}
+                    </div>
+                    <div>
+                        <b class="date"> {{ comment.date|date:'l j E Y H:i:s' }} </b>
+                    </div>
+                    <div>
+                        {{ comment.text }}
+                    </div>
+                    <div class="w-100 d-flex flex-column">
+                        <div class="d-flex">
+                            <div class="col text-align-center border-right-green">
+                                <button data-bs-toggle="collapse" data-bs-target="#comment-answer-{{comment.id}}"> Odpowiedz <i class="bi bi-chat-left-dots-fill" > </i> </button>
+                            </div>
+                            <div class="col text-align-center border-right-green hover-white">
+                                <button class="hover-white"> Polub <i class="bi bi-hand-thumbs-up-fill"> </i> </button>
+                            </div>
+                        </div>
+                        <div class="collapse" id="comment-answer-{{comment.id}}">
+                                <div class="d-flex align-items-center flex-column mt-3 mb-4">
+                                Odpowiadasz użytkownikowi {{comment.user}}!
+                                <div class="d-flex justify-content-center rounded w-50 bg-beige align-items-stretch border border-light-subtle">
+                                    <textarea class='p-2 search w-90 border-0 border' type="text" placeholder="Napisz odpowiedź" rows="5" id="comment-text-{{post.id}}"> </textarea>
+                                    <button class="hover-white search p-2 w-10 text-align-center bi bi-send-fill border-start border-light-subtle add-comment" data-comment-id="{{comment.id}}"> </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

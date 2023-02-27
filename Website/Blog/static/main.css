@@ -1,0 +1,138 @@
+* {
+    color: white;
+}
+.vh-25 {
+    height: 25vh;
+}
+.vh-50 {
+    height: 50vh;
+}
+.vh-75 {
+    height: 75vh;
+}
+.min-vh-10 {
+    min-height: 10vh;
+}
+.min-vh-25 {
+    min-height: 25vh;
+}
+.min-vh-50 {
+    min-height: 50vh;
+}
+.min-vh-75 {
+    min-height: 75vh;
+}
+.blogram {
+    color: #D9BA8C;
+    font-family: italic;
+    letter-spacing: 3px;
+}
+nav {
+    background: rgb(28,193,129);
+    background: linear-gradient(0deg, rgba(28,193,129,1) 0%, rgba(42,31,31,1) 100%);
+}
+
+.row-background {
+    background: rgb(8,69,45);
+    background: linear-gradient(0deg, rgba(8,69,45,1) 0%, rgba(42,31,31,1) 100%);
+}
+
+.text-align-center {
+    text-align: center;
+}
+footer {
+    background: rgb(8,69,45);
+    background: linear-gradient(0deg, rgba(42,31,31,1) 0%, rgba(8,69,45,1) 100%);
+}
+.green-border {
+    border-color: blue;
+}
+
+.bi {
+    color: #D9BA8C;
+}
+.search {
+    color: green;
+    background-color: #D9BA8C;
+}
+
+#search, #friend-search {
+    background: transparent;
+    border: none;
+    border-right: 1px solid green;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: white !important;
+}
+#search textarea:focus, input:focus{
+    outline: none;
+}
+.search::placeholder {
+    color: grey;
+}
+button {
+all: unset;
+}
+.border-right-green {
+    border-right: 1px solid green
+}
+.w-33 {
+    width: 33%;
+}
+.date {
+    color: grey;
+}
+.bi::after {
+    content: none;
+}
+.bg-beige {
+    background-color: rgba(217, 186, 140, 1);
+    border: 2px solid green;
+}
+.color-green {
+    color: green;
+}
+.hover-white:hover {
+    color: white;
+}
+.w-10 {
+    width: 10%;
+}
+.w-90 {
+    width: 90%;
+}
+a, a:hover {
+    all: unset;
+    cursor: pointer;
+}
+a:hover {
+    font-size: 130%;
+}
+.login-form input, .login-form textarea{
+width: 100%;
+min-height: 5vh;
+color: green;
+}
+.bg-transparent {
+    background-color: rgba(0,0,0,0);
+}
+.liked {
+color: red;
+}
+.disabled {
+cursor: not-allowed;
+}
+.bg-beige-add-post {
+  background-color: rgba(217, 186, 140, 0.8);
+}
+@font-face {
+font-family: 'angeline';
+src: url('Angeline Vintage.ttf') format("truetype");
+}
+.font {
+font-family: 'angeline';
+}

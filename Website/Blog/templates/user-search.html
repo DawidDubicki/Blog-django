@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="col d-flex justify-content-center pt-4">
+    <div class="col-8 d-flex align-items-center flex-column">
+        {% for user in users %}
+        <a href="{% url 'account_url' user.username %}" class="mt-1 mb-1"> {{ user }} </a>
+{% endfor %}
+    </div>
+</div>
+{% endblock %}

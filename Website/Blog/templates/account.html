@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="col d-flex justify-content-center">
+    <div class="col-8 d-flex align-items-center flex-column">
+        <div class="col-12 p-3 d-flex justify-content-center">
+            <h2 class="text-align-center"> {{ user.username }} </h2>
+        </div>
+        <div class="col-12 d-flex mt-2 mb-5">
+            <div class="col text-align-center">
+            <button> Dodaj do znajomych </button>
+            </div>
+            <div class="col text-align-center">
+            <button> Obserwuj  </button>
+            </div>
+        </div>
+        <div class="col-12 d-flex">
+            <div class="col text-align-center">
+            Obserwowani {{ observed_count }} <i class="bi bi-eye-fill"> </i>
+            </div>
+            <div class="col text-align-center">
+            Obserwujący {{ observed_by_count }} <i class="bi bi-emoji-heart-eyes-fill"> </i>
+            </div>
+            <div class="col text-align-center">
+            Polubień  {{ account_likes_count }} <i class="bi bi-hand-thumbs-up-fill"> </i>
+            </div>
+        </div>
+        <div class="col-12 pt-5 d-flex justify-content-evenly">
+            <div class="col d-flex justify-content-center">
+                <a class="text-align-center p-4" data-bs-toggle="collapse" data-bs-target="#account-friend-list">
+                    Przyjaciele
+                </a>
+            </div>
+            <div class="col d-flex justify-content-center">
+                 <a class="text-align-center p-4" data-bs-toggle="collapse" data-bs-target="#account-post-list">
+                    Posty
+                </a>
+            </div>
+            <div class="col d-flex justify-content-center">
+                 <a class="text-align-center p-4" data-bs-toggle="collapse" data-bs-target="#account-details-list">
+                    Szczegóły profilu
+                </a>
+            </div>
+        </div>
+        <div class="accordion pt-5 col-9 d-flex justify-content-center">
+            <div class="col-12" id="accordion">
+                <div class="collapse show" id="account-friend-list" data-bs-parent="#accordion">
+                    <div class="d-flex justify-content-center">
+                        {% if friend_list %}
+                            {{ friend_list }}
+                        {% else %}
+                        Użytkownik {{user}} nie posiada jeszcze przyjaciół ;c
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="collapse" id="account-post-list" data-bs-parent="#accordion">
+                    <div class="d-flex justify-content-center">
+                        {% if posts %}
+                            {% include 'posts.html' %}
+                        {% else %}
+                        Użytkownik {{user}} nie posiada jeszcze postów ;c
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="collapse" id="account-details-list" data-bs-parent="#accordion">
+                    <div class="d-flex justify-content-center">
+                        Data dołączenia: {{ user.date_joined|date:'j d Y' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
